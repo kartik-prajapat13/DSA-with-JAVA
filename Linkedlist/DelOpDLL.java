@@ -20,7 +20,7 @@ class Node {
 
 public class DelOpDLL {
     public static void main(String[] args) {
-        int[] arr = { 10, 30, 50, 60, 70 };
+        int[] arr = { 10, 30, 50, 60, 70, 90, 100 };
 
         Node head = convertArr2DLL(arr);
         printlinkedlist(head);
@@ -35,6 +35,10 @@ public class DelOpDLL {
 
         System.out.print("After Deleting the Head: ");
         head = DelHead(head);
+        printlinkedlist(head);
+
+        System.out.println();
+        head = DelAtPos(head, 3);
         printlinkedlist(head);
 
     }
@@ -94,6 +98,48 @@ public class DelOpDLL {
         head.back = null;
 
         return head;
+    }
+
+    private static Node DelAtPos(Node head, int k) {
+
+        if (head == null) {
+            return null;
+        }
+
+        Node temp = head;
+        int cnt = 0;
+
+        while (temp != null) {
+            cnt++;
+            if (cnt == k)
+                break;
+            temp = temp.next;
+
+        }
+
+        Node prev = temp.back;
+        Node front = temp.next;
+
+        if (prev == null && front == null) {
+            return null;
+        }
+
+        else if (prev == null) { // Means we are at the head position
+            return null;
+        }
+
+        else if (front == null) { // Means we are at the Tail position
+            return null;
+        }
+
+        prev.next = front;
+        front.back = prev;
+
+        temp.next = null;
+        temp.back = null;
+
+        return head;
+
     }
 
 }
